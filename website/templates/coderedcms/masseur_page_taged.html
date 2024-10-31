@@ -1,0 +1,79 @@
+{% extends "coderedcms/pages/web_page_notitle.html" %}
+{% load wagtailcore_tags wagtailimages_tags static i18n %}
+{% block content %}
+
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="page-content">
+
+
+<div class="main-profile">
+  <div class="row">
+    <div class="col-lg-4">
+      {% if page.image_gallery and page.image_gallery.0 %}
+        {% image page.image_gallery.0.value fill-800x600 as profile_img %}
+        <img src="{{ profile_img.url }}" alt="{{ page.user_name }}" style="border-radius: 23px;">
+      {% else %}
+        <img src="{% static 'assets/images/default-profile.jpg' %}" alt="{{ page.user_name }}" style="border-radius: 23px;">
+      {% endif %}
+    </div>
+    <div class="col-lg-4 align-self-center">
+      <div class="main-info header-text">
+        <span>{% trans 'Offline' %}</span> <!-- You may replace this with dynamic status if available -->
+        <h4>{% trans page.user_name %}</h4>
+        <p>{% trans page.user_bio|default:"This user hasn't shared a bio yet." %}</p>
+        <div class="main-border-button">
+<a href="https://wa.me/{{ page.whatsapp }}?text=Merhaba%2C+{{ page.user_name|urlencode }}" target="_blank">
+  {% trans 'Connect on WhatsApp' %}
+</a>        </div>
+      </div>
+    </div>
+    <div class="col-lg-4 align-self-center">
+      <ul>
+        <li>{% trans 'Ad ID' %} <span>{{ page.advert_id }}</span></li>
+        <li>{% trans 'Membership Date' %} <span>{{ page.membership_date }}</span></li>
+        <li>{% trans 'Experience Years' %} <span>{{ page.experience_years }}</span></li>
+        <li>{% trans 'Certificates' %} <span>{{ page.certificate_status|default:"None" }}</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="clips">
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="heading-section">
+              <h4><em>{% trans page.user_name %}'s</em> {% trans 'Gallery' %}</h4>
+            </div>
+          </div>
+
+<div class="row">
+  {% for image in page.image_gallery %}
+    {% image image.value fill-300x200 as thumb_img %}
+    <div class="col-lg-3 col-sm-6">
+      <div class="item">
+        <a href="{{ image.value.url }}" data-lightbox="gallery" data-title="{% trans page.title|default:'Gallery Item' %}">
+          <img src="{{ thumb_img.url }}" alt="{% trans 'Gallery Image Thumbnail' %}" class="img-responsive" style="border-radius: 23px;">
+        </a>
+      </div>
+    </div>
+  {% endfor %}
+</div>
+
+          <div class="col-lg-12">
+            <div class="main-button">
+              <a href="{{ page.user_profile_url }}">{% trans 'Load More Images' %}</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
