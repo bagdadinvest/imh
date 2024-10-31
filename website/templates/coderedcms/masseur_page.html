@@ -20,22 +20,23 @@
     </div>
     <div class="col-lg-4 align-self-center">
       <div class="main-info header-text">
-        <span>{% trans 'Offline' %}</span> <!-- You may replace this with dynamic status if available -->
+        <span>{% trans 'Cevrimdışı' %}</span> <!-- You may replace this with dynamic status if available -->
         <h4>{% trans page.user_name %}</h4>
-        <p>{% trans page.user_bio|default:"This user hasn't shared a bio yet." %}</p>
+        <p>{% trans page.user_bio|default:"Bu kullanıcı henüz bir biyografi paylaşmadı." %}</p>
         <div class="main-border-button">
-<a href="https://wa.me/{{ page.whatsapp }}?text=Merhaba%2C+{{ page.user_name|urlencode }}" target="_blank">
-  <img src="{% static 'assets/images/wsp.png' %}" alt="{% trans 'Connect on WhatsApp' %}" />
+<a href="https://wa.me/{{ page.whatsapp }}?text=merhaba+{{ page.user_name|lower }}%2C+masaj+sitesinden+yaziyorum+bilgi+verirmisiniz%3F" target="_blank" rel="noopener noreferrer">
+  <img src="{% static 'assets/images/wsp.png' %}" alt="{% trans 'WhatsApp Üzerinden Bağlan' %}" />
 </a>
+
      </div>
       </div>
     </div>
     <div class="col-lg-4 align-self-center">
       <ul>
-        <li>{% trans 'Ad ID' %} <span>{{ page.advert_id }}</span></li>
-        <li>{% trans 'Membership Date' %} <span>{{ page.membership_date }}</span></li>
-        <li>{% trans 'Experience Years' %} <span>{{ page.experience_years }}</span></li>
-        <li>{% trans 'Certificates' %} <span>{{ page.certificate_status|default:"None" }}</span></li>
+        <li>{% trans 'Ilân Kimliği' %} <span>{{ page.advert_id }}</span></li>
+        <li>{% trans 'Uyelik Tarihi' %} <span>{{ page.membership_date }}</span></li>
+        <li>{% trans 'Deneyim Yılları' %} <span>{{ page.experience_years }}</span></li>
+        <li>{% trans 'Sertifikalar' %} <span>{{ page.certificate_status|default:"Yok" }}</span></li>
       </ul>
     </div>
   </div>
@@ -46,17 +47,17 @@
         <div class="row">
           <div class="col-lg-12">
             <div class="heading-section">
-              <h4><em>{% trans page.user_name %}'s</em> {% trans 'Gallery' %}</h4>
+              <h4><em>{% trans page.user_name %}'nin</em> {% trans 'Galerisi' %}</h4>
             </div>
           </div>
 
 <div class="row">
   {% for image in page.image_gallery %}
-    {% image image.value fill-300x200 as thumb_img %}
+    {% image image.value max-300x200 as thumb_img %}
     <div class="col-lg-3 col-sm-6">
       <div class="item">
-        <a href="{{ image.value.url }}" data-lightbox="gallery" data-title="{% trans page.title|default:'Gallery Item' %}">
-          <img src="{{ thumb_img.url }}" alt="{% trans 'Gallery Image Thumbnail' %}" class="img-responsive" style="border-radius: 23px;">
+        <a href="{{ image.value.url }}" data-lightbox="gallery" data-title="{% trans page.title|default:'Galeri Ürünü' %}">
+          <img src="{{ thumb_img.url }}" alt="{% trans 'Galeri Resim Küçük Resmi' %}" class="img-responsive" style="border-radius: 23px;">
         </a>
       </div>
     </div>
@@ -65,7 +66,7 @@
 
           <div class="col-lg-12">
             <div class="main-button">
-              <a href="{{ page.user_profile_url }}">{% trans 'Load More Images' %}</a>
+              <a href="{{ page.user_profile_url }}">{% trans 'Daha Fazla Resim Yükle' %}</a>
             </div>
           </div>
         </div>

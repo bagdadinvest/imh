@@ -78,7 +78,8 @@ MIDDLEWARE = [
     "wagtail.contrib.redirects.middleware.RedirectMiddleware",
     # Fetch from cache. Must be LAST.
     "wagtailcache.cache.FetchFromCacheMiddleware",
-    'debug_toolbar.middleware.DebugToolbarMiddleware',
+    'imh.middleware.CustomDebugToolbarMiddleware',  # Add this line
+    'imh.middleware.SuperuserDebugMiddleware',
 ]
 
 INTERNAL_IPS = [
